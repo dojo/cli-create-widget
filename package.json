@@ -1,0 +1,35 @@
+{
+  "name": "@dojo/cli-create-widget",
+  "version": "2.0.0-pre",
+  "description": "Creates a widget template and boilerplate",
+  "engines": {
+    "npm": ">=3.0.0"
+  },
+  "private": true,
+  "homepage": "http://dojo.io",
+  "bugs": {
+    "url": "https://github.com/dojo/cli-create-widget/issues"
+  },
+  "license": "BSD-3-Clause",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dojo/cli-create-widget.git"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "@dojo/loader": "next",
+    "@dojo/interfaces": "next",
+    "@types/chai": "4.0.*",
+    "@types/glob": "5.0.*",
+    "@types/grunt": "0.4.*",
+    "@types/sinon": "^1.16.31",
+    "codecov.io": "0.1.6",
+    "grunt": "~1.0.1",
+    "grunt-dojo2": "latest",
+    "intern": "^3.4.6",
+    "typescript": "~2.4.2"
+  }
+}
