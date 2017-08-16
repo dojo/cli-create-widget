@@ -11,7 +11,8 @@
 		"types": [ "intern" ]
 	},
 	"include": [
-		"./src/**/*.ts",
+		"./typings/index.d.ts",
+		"./src/*.ts",
 		"./tests/**/*.ts"
 	]
 }

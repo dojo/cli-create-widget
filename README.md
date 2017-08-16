@@ -1,60 +1,69 @@
 # @dojo/cli-create-widget
 
-<!-- TODO: change and uncomment
-[![Build Status](https://travis-ci.org/dojo/<< package-name >>.svg?branch=master)](https://travis-ci.org/dojo/<< package-name >>)
-[![codecov](https://codecov.io/gh/dojo/<< package-name >>/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/<< package-name >>)
-[![npm version](https://badge.fury.io/js/dojo-<< package-name >>.svg)](http://badge.fury.io/js/dojo-<< package-name >>)
--->
+[![Build Status](https://travis-ci.org/dojo/cli-create-widget.svg?branch=master)](https://travis-ci.org/dojo/cli-create-widget)
+[![codecov](https://codecov.io/gh/dojo/cli-create-widget/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-create-widget)
+[![npm version](https://badge.fury.io/js/%40dojo%2Fcli-create-widget.svg)](https://badge.fury.io/js/%40dojo%2Fcli-create-widget)
 
-Creates a Dojo 2 widget template and all associated boilerplate.
+The `create widget` command for the `dojo cli`.
+
+**WARNING** This is _beta_ software. While we do not anticipate significant changes to the API at this stage, we may feel the need to do so. This is not yet production ready, so you should use at your own risk.
+
+- [Usage](#usage)
+- [Features](#features)
+- [How do I contribute?](#how-do-i-contribute)
+  - [Installation](#installation)
+  - [Testing](#testing)
+- [Licensing information](#licensing-information)
+
+## Usage
+
+To use `@dojo/cli-create-widget`, install the project globally along side `dojo cli`:
+
+```bash
+npm install -g @dojo/cli-create-widget
+```
+
+Run using:
+
+```bash
+dojo create [widget] --name <widget name> --styles <CSS path> --tests <test path>
+```
 
 ## Features
 
-Coming Soon!
+`@dojo/cli-create-widget` generates an opinionated skeleton component structure for use within a Dojo 2 application. The location where styles and tests are created can be customized using the `--styles` and `--tests` arguments respectively. By default, the following folder structure will be created:
 
-## How do I use this package?
-
-To use this package ensure that you have [@dojo/cli](https://github.com/dojo/cli) installed globally.
-
-Install and run the command as follows:
-
-```bash
-npm install @dojo/cli-create-widget -g
-
-dojo create widget
 ```
+MyComponent.ts
+styles/
+styles/myComponent.m.css
+styles/myComponent.m.css.d.ts,
+tests/unit/MyComponent.ts
+```
+
+It's also possible to generate a [Custom Element](https://www.w3.org/TR/2016/WD-custom-elements-20161013/) descriptor by passing the `--component` boolean argument. This will generate a `createMyComponentElement.ts` file alongside the actual component file.
 
 ## How do I contribute?
 
 We appreciate your interest!  Please see the [Dojo 2 Meta Repository](https://github.com/dojo/meta#readme) for the
 Contributing Guidelines and Style Guide.
 
-## Testing
+### Installation
+
+To start working with this package, clone the repository and run `npm install`.
+
+In order to build the project run `grunt dev` or `grunt dist`.
+
+### Testing
 
 Test cases MUST be written using [Intern](https://theintern.github.io) using the Object test interface and Assert assertion interface.
 
 90% branch coverage MUST be provided for all code submitted to this repository, as reported by istanbul’s combined coverage results for all supported platforms.
 
-To test locally in node run:
+To test locally run:
 
 `grunt test`
 
-To test against browsers with a local selenium server run:
-
-`grunt test:local`
-
-To test against BrowserStack or Sauce Labs run:
-
-`grunt test:browserstack`
-
-or
-
-`grunt test:saucelabs`
-
 ## Licensing information
 
-TODO: If third-party code was used to write this library, make a list of project names and licenses here
-
-* [Third-party lib one](https//github.com/foo/bar) ([New BSD](http://opensource.org/licenses/BSD-3-Clause))
-
-© [JS Foundation](https://js.foundation/) & contributors. [New BSD](http://opensource.org/licenses/BSD-3-Clause) and [Apache 2.0](https://opensource.org/licenses/Apache-2.0) licenses.
+© 2017 [JS Foundation](https://js.foundation/). [New BSD](http://opensource.org/licenses/BSD-3-Clause) license.
