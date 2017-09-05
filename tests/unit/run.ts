@@ -1,4 +1,4 @@
-import { Helper } from '@dojo/cli/interfaces';
+import { Helper } from '@dojo/interfaces/cli';
 import { SinonStub, stub } from 'sinon';
 import * as assert from 'intern/chai!assert';
 import * as mockery from 'mockery';
