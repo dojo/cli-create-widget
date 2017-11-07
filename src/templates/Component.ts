@@ -15,7 +15,7 @@ export const <%= name %>Base = ThemeableMixin(WidgetBase);
 
 @theme(css)
 export default class <%= name %> extends <%= name %>Base<<%= name %>Properties> {
-	render(): DNode {
+	protected render(): DNode | DNode[] { {
 		return null;
 	}
 }

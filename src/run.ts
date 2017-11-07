@@ -31,8 +31,13 @@ export interface CreateWidgetArgs extends Argv {
 function getDirectoryNames(args: CreateWidgetArgs, folderName: string) {
 	const dirs = [ folderName ];
 
-	!args.styles && dirs.push(`${folderName}/styles`);
-	!args.tests && dirs.push(`${folderName}/tests/unit`);
+	if (!args.styles) {
+		dirs.push(`${folderName}/styles`);
+	}
+
+	if (!args.tests) {
+		dirs.push(`${folderName}/tests/unit`);
+	}
 
 	return dirs;
 }
@@ -57,10 +62,12 @@ function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleR
 		}
 	];
 
-	args.component && files.push({
-		src: join(packagePath, 'templates', 'createComponentElement.ts'),
-		dest: join(folderName, `create${args.name}Element.ts`)
-	});
+	if (args.component) {
+		files.push({
+			src: join(packagePath, 'templates', 'createComponentElement.ts'),
+			dest: join(folderName, `create${args.name}Element.ts`)
+		});
+	}
 
 	return files;
 }
