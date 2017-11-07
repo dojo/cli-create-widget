@@ -1,6 +1,7 @@
-# @dojo/cli-create-widget
+# cli-create-widget
 
 [![Build Status](https://travis-ci.org/dojo/cli-create-widget.svg?branch=master)](https://travis-ci.org/dojo/cli-create-widget)
+<!-- [![Build status](https://ci.appveyor.com/api/projects/status/ap88vuv8xsuelowm/branch/master?svg=true)](https://ci.appveyor.com/project/Dojo/cli-create-widget/branch/master) -->
 [![codecov](https://codecov.io/gh/dojo/cli-create-widget/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-create-widget)
 [![npm version](https://badge.fury.io/js/%40dojo%2Fcli-create-widget.svg)](https://badge.fury.io/js/%40dojo%2Fcli-create-widget)
 

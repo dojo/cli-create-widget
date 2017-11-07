@@ -1,16 +1,12 @@
-import * as registerSuite from 'intern!object';
+const { registerSuite } = intern.getInterface('object');
 
-import { v } from '@dojo/widget-core/d';
 import harness, { Harness } from '@dojo/test-extras/harness';
 
 import <%= name %>, { <%= name %>Properties } from './<%= testComponentPath %>';
-import * as css from './<%= testStylePath %>';
 
 let widget: Harness<<%= name %>Properties, typeof <%= name %>>;
 
-registerSuite({
-	name: '<%= name %>',
-
+registerSuite('<%= name %>', {
 	beforeEach() {
 		widget = harness(<%= name %>);
 	},
@@ -19,9 +15,9 @@ registerSuite({
 		widget.destroy();
 	},
 
-	'Should construct <%= name %>'() {
-		widget.expectRender(v('div', {
-			classes: widget.classes(css.root)
-		}, [ 'My <%= name %>' ]));
+	tests: {
+		'should construct <%= name %>'() {
+			widget.expectRender(null);
+		}
 	}
 });

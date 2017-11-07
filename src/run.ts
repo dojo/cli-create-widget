@@ -1,5 +1,5 @@
 import { Argv } from 'yargs';
-import { Command, Helper, OptionsHelper } from '@dojo/interfaces/cli';
+import { Helper } from '@dojo/interfaces/cli';
 import { join, relative, resolve } from 'path';
 import * as chalk from 'chalk';
 import createDir from '@dojo/cli-create-app/createDir';
@@ -31,13 +31,8 @@ export interface CreateWidgetArgs extends Argv {
 function getDirectoryNames(args: CreateWidgetArgs, folderName: string) {
 	const dirs = [ folderName ];
 
-	if (!args.styles) {
-		dirs.push(`${folderName}/styles`);
-	}
-
-	if (!args.tests) {
-		dirs.push(`${folderName}/tests/unit`);
-	}
+	!args.styles && dirs.push(`${folderName}/styles`);
+	!args.tests && dirs.push(`${folderName}/tests/unit`);
 
 	return dirs;
 }
@@ -62,19 +57,17 @@ function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleR
 		}
 	];
 
-	if (args.component) {
-		files.push({
-			src: join(packagePath, 'templates', 'createComponentElement.ts'),
-			dest: join(folderName, `create${args.name}Element.ts`)
-		});
-	}
+	args.component && files.push({
+		src: join(packagePath, 'templates', 'createComponentElement.ts'),
+		dest: join(folderName, `create${args.name}Element.ts`)
+	});
 
 	return files;
 }
 
 export default async function(helper: Helper, args: CreateWidgetArgs) {
 	const name = args.name;
-	const folderName = `${name.charAt(0).toLowerCase()}${name.slice(1)}`;
+	const folderName = name.toLowerCase();
 	const styleRoot = args.styles || `${folderName}/styles`;
 	const testRoot = args.tests || `${folderName}/tests/unit`;
 

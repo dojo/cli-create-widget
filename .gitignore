@@ -1,3 +1,7 @@
+*.js
+*.js.map
+!/*.js
+!/tasks/*.js
 /_build
 /bower_components
 /dist
@@ -6,9 +10,8 @@
 /typings
 .baseDir.ts
 .tscache
-coverage-unmapped.json
-coverage-final.json
+.tsconfig*.json
+.history
 coverage-final.lcov
 npm-debug.log
-package-lock.json
 yarn.lock

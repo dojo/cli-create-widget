@@ -1,25 +1,28 @@
-import * as registerSuite from 'intern!object';
-import * as assert from 'intern/chai!assert';
+const { registerSuite } = intern.getInterface('object');
+const { assert } = intern.getPlugin('chai');
 import register from './../../src/register';
 import * as sinon from 'sinon';
 
 let sandbox: sinon.SinonSandbox;
 
-registerSuite({
-	name: 'register',
-	'beforeEach'() {
+registerSuite('register', {
+	beforeEach() {
 		sandbox = sinon.sandbox.create();
 	},
-	'afterEach'() {
+
+	afterEach() {
 		sandbox.restore();
 	},
-	'Should add correct yargs options'() {
-		const options = sandbox.stub();
-		register(options);
-		assert.strictEqual(options.callCount, 4);
-		assert.isTrue(options.firstCall.calledWithMatch('n', { 'alias': 'name' }));
-		assert.isTrue(options.secondCall.calledWithMatch('s', { 'alias': 'styles' }));
-		assert.isTrue(options.thirdCall.calledWithMatch('t', { 'alias': 'tests' }));
-		assert.isTrue(options.lastCall.calledWithMatch('c', { 'alias': 'component' }));
+
+	tests: {
+		'Should add correct yargs options'() {
+			const options = sandbox.stub();
+			register(options);
+			assert.strictEqual(options.callCount, 4);
+			assert.isTrue(options.firstCall.calledWithMatch('n', { 'alias': 'name' }));
+			assert.isTrue(options.secondCall.calledWithMatch('s', { 'alias': 'styles' }));
+			assert.isTrue(options.thirdCall.calledWithMatch('t', { 'alias': 'tests' }));
+			assert.isTrue(options.lastCall.calledWithMatch('c', { 'alias': 'component' }));
+		}
 	}
 });
