@@ -14,8 +14,10 @@ export interface <%= name %>Properties extends WidgetProperties { };
 export const <%= name %>Base = ThemeableMixin(WidgetBase);
 
 @theme(css)
-export default class <%= name %> extends <%= name %>Base<<%= name %>Properties> {
+export class <%= name %> extends <%= name %>Base<<%= name %>Properties> {
 	protected render(): DNode | DNode[] { {
 		return null;
 	}
 }
+
+export default <%= name %>;
