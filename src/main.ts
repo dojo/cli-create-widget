@@ -1,3 +1,11 @@
-export {
-	/* provide the public API here */
+import { Command } from '@dojo/interfaces/cli';
+import register from './register';
+import run, { CreateWidgetArgs } from './run';
+
+const command: Command<CreateWidgetArgs> = {
+	description: 'scaffolds a new widget',
+	register,
+	run
 };
+
+export default command;

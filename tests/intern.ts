@@ -15,23 +15,6 @@ export const capabilities = {
 	name: '@dojo/cli-create-widget'
 };
 
-// Browsers to run integration testing against. Note that version numbers must be strings if used with Sauce
-// OnDemand. Options that will be permutated are browserName, version, platform, and platformVersion; any other
-// capabilities options specified for an environment will be copied as-is
-export const environments = [
-	{ browserName: 'internet explorer', version: '11', platform: 'WINDOWS' },
-	{ browserName: 'edge' },
-	{ browserName: 'firefox', platform: 'WINDOWS' },
-	{ browserName: 'chrome', platform: 'WINDOWS' },
-	{ browserName: 'safari', platform: 'MAC' }
-];
-
-// Maximum number of simultaneous integration tests that should be executed on the remote WebDriver service
-export const maxConcurrency = 2;
-
-// Name of the tunnel class to use for WebDriver tests
-export const tunnel = 'BrowserStackTunnel';
-
 // Support running unit tests from a web server that isn't the intern proxy
 export const initialBaseUrl: string | null = (function () {
 	if (typeof location !== 'undefined' && location.pathname.indexOf('__intern/') > -1) {
@@ -43,7 +26,6 @@ export const initialBaseUrl: string | null = (function () {
 // The desired AMD loader to use when running unit tests (client.html/client.js). Omit to use the default Dojo
 // loader
 export const loaders = {
-	'host-browser': 'node_modules/@dojo/loader/loader.js',
 	'host-node': '@dojo/loader'
 };
 
@@ -52,10 +34,8 @@ export const loaders = {
 export const loaderOptions = {
 	// Packages that should be registered with the loader in each testing environment
 	packages: [
-		{ name: '@dojo', location: 'node_modules/@dojo' },
-		{ name: 'dojo', location: 'node_modules/intern/node_modules/dojo' },
-		{ name: 'grunt-dojo2', location: 'node_modules/grunt-dojo2' },
 		{ name: 'src', location: '_build/src' },
+		{ name: 'grunt-dojo2', location: 'node_modules/grunt-dojo2'},
 		{ name: 'tests', location: '_build/tests' }
 	]
 };
@@ -63,8 +43,5 @@ export const loaderOptions = {
 // Non-functional test suite(s) to run in each browser
 export const suites = [ 'tests/unit/all' ];
 
-// Functional test suite(s) to run in each browser once non-functional tests are completed
-export const functionalSuites = [ 'tests/functional/all' ];
-
 // A regular expression matching URLs to files that should not be included in code coverage analysis
-export const excludeInstrumentation = /(?:node_modules|bower_components|tests)[\/\\]/;
+export const excludeInstrumentation = /(?:node_modules|bower_components|tests|templates)[\/\\]|dirname/;
