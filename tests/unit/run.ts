@@ -52,16 +52,16 @@ registerSuite('run', {
 		},
 
 		async 'Should get files to render from config'() {
-			await run(helperStub, Object.assign(args, { component: true }));
+			await run(helperStub, Object.assign(args, { component: true, styles: '.', tests: '.' }));
 			assert.isTrue(renderFilesStub.calledOnce);
 
 			const renderFilesArgs = renderFilesStub.args[0];
 
 			assert.deepEqual(renderFilesArgs[0].map((obj: any) => obj.dest), [
 				`${lowerCaseName}/${name}.ts`,
-				`${lowerCaseName}/styles/${lowerCaseName}.m.css`,
-				`${lowerCaseName}/styles/${lowerCaseName}.m.css.d.ts`,
-				`${lowerCaseName}/tests/unit/${name}.ts`,
+				`${lowerCaseName}.m.css`,
+				`${lowerCaseName}.m.css.d.ts`,
+				`${name}.ts`,
 				`${lowerCaseName}/create${name}Element.ts`
 			]);
 		}

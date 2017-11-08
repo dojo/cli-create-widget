@@ -1,4 +1,4 @@
-const { registerSuite } = intern.getInterface('object');
+const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 
 import harness, { Harness } from '@dojo/test-extras/harness';
 
@@ -6,18 +6,16 @@ import <%= name %>, { <%= name %>Properties } from './<%= testComponentPath %>';
 
 let widget: Harness<<%= name %>Properties, typeof <%= name %>>;
 
-registerSuite('<%= name %>', {
-	beforeEach() {
+describe('<%= name %>', () => {
+	beforeEach(() => {
 		widget = harness(<%= name %>);
-	},
+	});
 
-	afterEach() {
+	afterEach(() => {
 		widget.destroy();
-	},
+	});
 
-	tests: {
-		'should construct <%= name %>'() {
-			widget.expectRender(null);
-		}
-	}
+	it('should construct <%= name %>', () => {
+		widget.expectRender(null);
+	});
 });
