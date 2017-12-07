@@ -26,9 +26,10 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "@dojo/cli-create-app": "~0.2.0",
-    "@dojo/core": "~0.2.1",
+    "@dojo/cli-create-app": "~0.3.0",
+    "@dojo/core": "~0.3.0",
     "@dojo/has": "~0.1.1",
+    "@dojo/interfaces": "~0.2.0",
     "@dojo/loader": "~0.1.1",
     "@dojo/shim": "~0.2.3",
     "@types/chalk": "^0.4.31",
