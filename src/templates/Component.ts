@@ -1,6 +1,6 @@
 import { DNode } from '@dojo/widget-core/interfaces';
+import { ThemedMixin, theme } from '@dojo/widget-core/mixins/Themed';
 import { WidgetBase } from '@dojo/widget-core/WidgetBase';
-import { ThemedMixin, theme } from '@dojo/widget-core/mixins/Themeable';
 
 import * as css from './<%= componentStylePath %>';
 
@@ -11,10 +11,10 @@ import * as css from './<%= componentStylePath %>';
  */
 export interface <%= name %>Properties { };
 
-export const <%= name %>Base = ThemedMixin(WidgetBase);
+export const ThemedBase = ThemedMixin(WidgetBase);
 
 @theme(css)
-export class <%= name %> extends <%= name %>Base<<%= name %>Properties> {
+export class <%= name %><P extends <%= name %>Properties = <%= name %>Properties> extends ThemedBase<P> {
 	protected render(): DNode | DNode[] {
 		return null;
 	}

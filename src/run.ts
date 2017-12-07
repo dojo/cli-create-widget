@@ -1,5 +1,5 @@
 import { Argv } from 'yargs';
-import { Helper } from '@dojo/cli/interfaces';
+import { Helper } from '@dojo/interfaces/cli';
 import { join, relative, resolve } from 'path';
 import * as chalk from 'chalk';
 import createDir from '@dojo/cli-create-app/createDir';
