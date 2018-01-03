@@ -13,11 +13,11 @@ registerSuite('main', {
 		});
 
 		mockery.registerMock('./run', {
-			'default': runStub
+			default: runStub
 		});
 
 		mockery.registerMock('./register', {
-			'default': registerStub
+			default: registerStub
 		});
 
 		main = require('../../src/main');

@@ -29,7 +29,7 @@ export interface CreateWidgetArgs extends Argv {
 }
 
 function getDirectoryNames(args: CreateWidgetArgs, folderName: string) {
-	const dirs = [ folderName ];
+	const dirs = [folderName];
 
 	if (!args.styles) {
 		dirs.push(`${folderName}/styles`);

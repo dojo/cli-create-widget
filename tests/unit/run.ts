@@ -6,7 +6,7 @@ import * as mockery from 'mockery';
 import { SinonStub, stub } from 'sinon';
 
 type ESModule = {
-	default: any
+	default: any;
 };
 
 const name = 'testAppName';
@@ -21,10 +21,10 @@ let run: any;
 registerSuite('run', {
 	before() {
 		consoleStub = stub(console, 'info');
-		mockery.enable({ 'warnOnUnregistered': false });
+		mockery.enable({ warnOnUnregistered: false });
 		mockery.registerMock('@dojo/cli-create-app/createDir', { default: createDirStub });
 		mockery.registerMock('@dojo/cli-create-app/renderFiles', { default: renderFilesStub });
-		run = (<ESModule> require('../../src/run')).default;
+		run = (<ESModule>require('../../src/run')).default;
 	},
 
 	after() {
