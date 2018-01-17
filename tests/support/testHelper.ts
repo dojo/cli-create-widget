@@ -1,6 +1,6 @@
 import { stub } from 'sinon';
 import * as yargs from 'yargs';
-import { Helper } from '@dojo/interfaces/cli';
+import { Helper } from '@dojo/cli/interfaces';
 
 export function getHelperStub(): Helper {
 	return {
@@ -8,7 +8,8 @@ export function getHelperStub(): Helper {
 		yargs,
 		command: {
 			run: stub().returns(Promise.resolve()),
-			exists: stub().returns(true)
+			exists: stub().returns(true),
+			renderFiles: stub()
 		},
 		configuration: {
 			set: stub().returns(Promise.resolve()),
