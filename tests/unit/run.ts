@@ -1,7 +1,7 @@
 const { registerSuite } = intern.getInterface('object');
 const { assert } = intern.getPlugin('chai');
 import { getHelperStub } from '../support/testHelper';
-import { Helper } from '@dojo/interfaces/cli';
+import { Helper } from '@dojo/cli/interfaces';
 import * as mockery from 'mockery';
 import { SinonStub, stub } from 'sinon';
 
@@ -13,7 +13,6 @@ const name = 'testAppName';
 const lowerCaseName = name.toLowerCase();
 const args = { name };
 const createDirStub: SinonStub = stub();
-const renderFilesStub: SinonStub = stub().returns(Promise.resolve());
 let consoleStub: SinonStub;
 let helperStub: Helper;
 let run: any;
@@ -23,7 +22,6 @@ registerSuite('run', {
 		consoleStub = stub(console, 'info');
 		mockery.enable({ 'warnOnUnregistered': false });
 		mockery.registerMock('@dojo/cli-create-app/createDir', { default: createDirStub });
-		mockery.registerMock('@dojo/cli-create-app/renderFiles', { default: renderFilesStub });
 		run = (<ESModule> require('../../src/run')).default;
 	},
 
@@ -36,7 +34,6 @@ registerSuite('run', {
 	beforeEach() {
 		helperStub = getHelperStub();
 		createDirStub.reset();
-		renderFilesStub.reset();
 	},
 
 	tests: {
@@ -53,6 +50,8 @@ registerSuite('run', {
 
 		async 'Should get files to render from config'() {
 			await run(helperStub, Object.assign(args, { component: true, styles: '.', tests: '.' }));
+
+			const renderFilesStub: SinonStub = helperStub.command.renderFiles as SinonStub;
 			assert.isTrue(renderFilesStub.calledOnce);
 
 			const renderFilesArgs = renderFilesStub.args[0];

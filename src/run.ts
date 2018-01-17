@@ -1,9 +1,8 @@
 import { Argv } from 'yargs';
-import { Helper } from '@dojo/interfaces/cli';
+import { Helper } from '@dojo/cli/interfaces';
 import { join, relative, resolve } from 'path';
 import * as chalk from 'chalk';
 import createDir from '@dojo/cli-create-app/createDir';
-import renderFiles from '@dojo/cli-create-app/renderFiles';
 
 import register from './register';
 import run from './run';
@@ -82,7 +81,7 @@ export default async function(helper: Helper, args: CreateWidgetArgs) {
 
 	createDir(...getDirectoryNames(args, folderName));
 
-	renderFiles(getRenderFilesConfig(args, folderName, styleRoot, testRoot), {
+	helper.command.renderFiles(getRenderFilesConfig(args, folderName, styleRoot, testRoot), {
 		name,
 		folderName,
 		componentStylePath: relative(folderName, `${styleRoot}/${folderName}.m.css`),
