@@ -1,12 +1,9 @@
 import { Argv } from 'yargs';
 import { Helper } from '@dojo/interfaces/cli';
-import { join, relative, resolve } from 'path';
+import { join, relative } from 'path';
 import * as chalk from 'chalk';
 import createDir from '@dojo/cli-create-app/createDir';
 import renderFiles from '@dojo/cli-create-app/renderFiles';
-
-import register from './register';
-import run from './run';
 
 const pkgDir: any = require('pkg-dir');
 const packagePath = pkgDir.sync(__dirname);
@@ -29,7 +26,7 @@ export interface CreateWidgetArgs extends Argv {
 }
 
 function getDirectoryNames(args: CreateWidgetArgs, folderName: string) {
-	const dirs = [ folderName ];
+	const dirs = [folderName];
 
 	if (!args.styles) {
 		dirs.push(`${folderName}/styles`);

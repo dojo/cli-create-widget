@@ -12,7 +12,7 @@ export default function(options: OptionsHelper): void {
 		alias: 'styles',
 		defaultDescription: '<component_folder>/styles',
 		demand: false,
-		describe: 'The location of your widget\'s styles',
+		describe: "The location of your widget's styles",
 		requiresArg: true,
 		type: 'string'
 	});
@@ -20,7 +20,7 @@ export default function(options: OptionsHelper): void {
 		alias: 'tests',
 		defaultDescription: '<component_folder>/tests',
 		demand: false,
-		describe: 'The location of your widget\'s tests',
+		describe: "The location of your widget's tests",
 		requiresArg: true,
 		type: 'string'
 	});

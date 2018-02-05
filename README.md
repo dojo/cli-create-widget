@@ -47,7 +47,17 @@ It's also possible to generate a [Custom Element](https://www.w3.org/TR/2016/WD-
 ## How do I contribute?
 
 We appreciate your interest!  Please see the [Dojo 2 Meta Repository](https://github.com/dojo/meta#readme) for the
-Contributing Guidelines and Style Guide.
+Contributing Guidelines.
+
+### Code Style
+
+This repository uses [`prettier`](https://prettier.io/) for code styling rules and formatting. A pre-commit hook is installed automatically and configured to run `prettier` against all staged files as per the configuration in the projects `package.json`.
+
+An additional npm script to run `prettier` (with write set to `true`) against all `src` and `test` project files is available by running:
+
+```bash
+npm run prettier
+```
 
 ### Installation
 
