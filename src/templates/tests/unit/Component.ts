@@ -1,21 +1,14 @@
 const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 
-import harness, { Harness } from '@dojo/test-extras/harness';
+import { w } from '@dojo/widget-core/d';
+import harness from '@dojo/test-extras/harness';
 
 import <%= name %> from './<%= testComponentPath %>';
 
-let widget: Harness<<%= name %>>;
-
 describe('<%= name %>', () => {
-	beforeEach(() => {
-		widget = harness(<%= name %>);
-	});
-
-	afterEach(() => {
-		widget.destroy();
-	});
 
 	it('should construct <%= name %>', () => {
-		widget.expectRender(null);
+		const h = harness(() => w(<%= name %>, {}));
+		h.expect(() => null);
 	});
 });
