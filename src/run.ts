@@ -40,7 +40,7 @@ function getDirectoryNames(args: CreateWidgetArgs, folderName: string) {
 }
 
 function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleRoot: string, testRoot: string) {
-	const files = [
+	return [
 		{
 			src: join(packagePath, 'templates', 'Component.ts'),
 			dest: join(folderName, `${args.name}.ts`)
@@ -58,15 +58,6 @@ function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleR
 			dest: join(testRoot, `${args.name}.ts`)
 		}
 	];
-
-	if (args.component) {
-		files.push({
-			src: join(packagePath, 'templates', 'createComponentElement.ts'),
-			dest: join(folderName, `create${args.name}Element.ts`)
-		});
-	}
-
-	return files;
 }
 
 export default async function(helper: Helper, args: CreateWidgetArgs) {
@@ -82,6 +73,7 @@ export default async function(helper: Helper, args: CreateWidgetArgs) {
 	renderFiles(getRenderFilesConfig(args, folderName, styleRoot, testRoot), {
 		name,
 		folderName,
+		includeCustomElement: args.component,
 		componentStylePath: relative(folderName, `${styleRoot}/${folderName}.m.css`),
 		testStylePath: relative(testRoot, `${styleRoot}/${folderName}.m.css`),
 		testComponentPath: relative(testRoot, `${folderName}/${name}`)

@@ -13,7 +13,6 @@ export default function(options: OptionsHelper): void {
 		defaultDescription: '<component_folder>/styles',
 		demand: false,
 		describe: "The location of your widget's styles",
-		requiresArg: true,
 		type: 'string'
 	});
 	options('t', {
@@ -21,7 +20,6 @@ export default function(options: OptionsHelper): void {
 		defaultDescription: '<component_folder>/tests',
 		demand: false,
 		describe: "The location of your widget's tests",
-		requiresArg: true,
 		type: 'string'
 	});
 	options('c', {
