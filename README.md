@@ -41,7 +41,7 @@ styles/myComponent.m.css.d.ts,
 tests/unit/MyComponent.ts
 ```
 
-It's also possible to generate a [Custom Element](https://www.w3.org/TR/2016/WD-custom-elements-20161013/) descriptor by passing the `--component` boolean argument. This will generate a widget that includes the `@customElement` decorator with an empty configuration object ready for configuration, please see [the `@dojo/widget-core` readme](https://github.com/dojo/widget-core#web-components) for more information.
+It's also possible to generate a [Custom Element](https://www.w3.org/TR/2016/WD-custom-elements-20161013/) descriptor by passing the `--component` boolean argument. This will generate a widget that includes the `@customElement` decorator with an empty template object ready for configuration, please see [the `@dojo/widget-core` readme](https://github.com/dojo/widget-core#web-components) for more information.
 
 ## How do I contribute?
 
