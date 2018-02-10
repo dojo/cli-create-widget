@@ -1,7 +1,7 @@
 # cli-create-widget
 
 [![Build Status](https://travis-ci.org/dojo/cli-create-widget.svg?branch=master)](https://travis-ci.org/dojo/cli-create-widget)
-[![Build status](https://ci.appveyor.com/api/projects/status/ap88vuv8xsuelowm/branch/master?svg=true)](https://ci.appveyor.com/project/Dojo/cli-create-widget/branch/master)
+<!-- [![Build status](https://ci.appveyor.com/api/projects/status/ap88vuv8xsuelowm/branch/master?svg=true)](https://ci.appveyor.com/project/Dojo/cli-create-widget/branch/master) -->
 [![codecov](https://codecov.io/gh/dojo/cli-create-widget/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-create-widget)
 [![npm version](https://badge.fury.io/js/%40dojo%2Fcli-create-widget.svg)](https://badge.fury.io/js/%40dojo%2Fcli-create-widget)
 
@@ -41,7 +41,7 @@ styles/myComponent.m.css.d.ts,
 tests/unit/MyComponent.ts
 ```
 
-It's also possible to generate a [Custom Element](https://www.w3.org/TR/2016/WD-custom-elements-20161013/) descriptor by passing the `--component` boolean argument. This will generate include the `@customElement` decorator with an empty configuration object.
+It's also possible to generate a [Custom Element](https://www.w3.org/TR/2016/WD-custom-elements-20161013/) descriptor by passing the `--component` boolean argument. This will generate a widget that includes the `@customElement` decorator with an empty configuration object ready for configuration, please see [the `@dojo/widget-core` readme](https://github.com/dojo/widget-core#web-components) for more information.
 
 ## How do I contribute?
 
