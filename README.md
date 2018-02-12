@@ -5,13 +5,12 @@
 [![codecov](https://codecov.io/gh/dojo/cli-create-widget/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-create-widget)
 [![npm version](https://badge.fury.io/js/%40dojo%2Fcli-create-widget.svg)](https://badge.fury.io/js/%40dojo%2Fcli-create-widget)
 
-The `create widget` command for the `dojo cli`.
-
-**WARNING** This is _beta_ software. While we do not anticipate significant changes to the API at this stage, we may feel the need to do so. This is not yet production ready, so you should use at your own risk.
+A [Dojo CLI](https://github/dojo/cli) command that creates a Dojo 2 widget template with an optional custom element descriptor.
 
 - [Usage](#usage)
 - [Features](#features)
 - [How do I contribute?](#how-do-i-contribute)
+  - [Code Style](#code-style)
   - [Installation](#installation)
   - [Testing](#testing)
 - [Licensing information](#licensing-information)
@@ -42,7 +41,7 @@ styles/myComponent.m.css.d.ts,
 tests/unit/MyComponent.ts
 ```
 
-It's also possible to generate a [Custom Element](https://www.w3.org/TR/2016/WD-custom-elements-20161013/) descriptor by passing the `--component` boolean argument. This will generate a `createMyComponentElement.ts` file alongside the actual component file.
+It's also possible to generate a [Custom Element](https://www.w3.org/TR/2016/WD-custom-elements-20161013/) descriptor by passing the `--component` boolean argument. This will generate a widget that includes the `@customElement` decorator with an empty template object ready for configuration, please see [the `@dojo/widget-core` readme](https://github.com/dojo/widget-core#web-components) for more information.
 
 ## How do I contribute?
 

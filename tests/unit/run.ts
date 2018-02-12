@@ -61,8 +61,7 @@ registerSuite('run', {
 				`${lowerCaseName}/${name}.ts`,
 				`${lowerCaseName}.m.css`,
 				`${lowerCaseName}.m.css.d.ts`,
-				`${name}.ts`,
-				`${lowerCaseName}/create${name}Element.ts`
+				`${name}.ts`
 			]);
 		}
 	}
