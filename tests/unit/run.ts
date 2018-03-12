@@ -4,6 +4,7 @@ import { getHelperStub } from '../support/testHelper';
 import { Helper } from '@dojo/cli/interfaces';
 import * as mockery from 'mockery';
 import { SinonStub, stub } from 'sinon';
+import { join } from 'path';
 
 type ESModule = {
 	default: any;
@@ -58,7 +59,7 @@ registerSuite('run', {
 			const renderFilesArgs = renderFilesStub.args[0];
 
 			assert.deepEqual(renderFilesArgs[0].map((obj: any) => obj.dest), [
-				`${lowerCaseName}/${name}.ts`,
+				`${join(lowerCaseName, name)}.ts`,
 				`${lowerCaseName}.m.css`,
 				`${lowerCaseName}.m.css.d.ts`,
 				`${name}.ts`
