@@ -1,6 +1,6 @@
 import { Argv } from 'yargs';
 import { Helper } from '@dojo/cli/interfaces';
-import { join, relative } from 'path';
+import { join, posix } from 'path';
 import * as chalk from 'chalk';
 import createDir from '@dojo/cli-create-app/createDir';
 import renderFiles from '@dojo/cli-create-app/renderFiles';
@@ -74,9 +74,9 @@ export default async function(helper: Helper, args: CreateWidgetArgs) {
 		name,
 		folderName,
 		includeCustomElement: args.component,
-		componentStylePath: relative(folderName, `${styleRoot}/${folderName}.m.css`),
-		testStylePath: relative(testRoot, `${styleRoot}/${folderName}.m.css`),
-		testComponentPath: relative(testRoot, `${folderName}/${name}`)
+		componentStylePath: posix.relative(folderName, `${styleRoot}/${folderName}.m.css`),
+		testStylePath: posix.relative(testRoot, `${styleRoot}/${folderName}.m.css`),
+		testComponentPath: posix.relative(testRoot, `${folderName}/${name}`)
 	});
 
 	console.info(chalk.green.bold('\nAll done!\n'));
