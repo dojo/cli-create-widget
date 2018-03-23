@@ -2,8 +2,9 @@ const { registerSuite } = intern.getInterface('object');
 const { assert } = intern.getPlugin('chai');
 import { getHelperStub } from '../support/testHelper';
 import { Helper } from '@dojo/cli/interfaces';
-import * as mockery from 'mockery';
+import { join } from 'path';
 import { SinonStub, stub } from 'sinon';
+import * as mockery from 'mockery';
 
 type ESModule = {
 	default: any;
@@ -58,11 +59,24 @@ registerSuite('run', {
 			const renderFilesArgs = renderFilesStub.args[0];
 
 			assert.deepEqual(renderFilesArgs[0].map((obj: any) => obj.dest), [
-				`${lowerCaseName}/${name}.ts`,
+				`${join(lowerCaseName, name)}.ts`,
 				`${lowerCaseName}.m.css`,
 				`${lowerCaseName}.m.css.d.ts`,
 				`${name}.ts`
 			]);
+		},
+
+		async 'Should use correct paths'() {
+			await run(helperStub, Object.assign(args, { component: true, styles: '.', tests: '.' }));
+
+			assert.deepEqual(renderFilesStub.args[0][1] as any, {
+				name: 'testAppName',
+				folderName: 'testappname',
+				includeCustomElement: true,
+				componentStylePath: '../testappname.m.css',
+				testStylePath: 'testappname.m.css',
+				testComponentPath: 'testappname/testAppName'
+			});
 		}
 	}
 });
