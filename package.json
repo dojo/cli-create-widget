@@ -28,11 +28,11 @@
     "test": "grunt test"
   },
   "devDependencies": {
-    "@dojo/cli": "0.6.0",
-    "@dojo/core": "~0.3.0",
-    "@dojo/has": "~0.1.1",
-    "@dojo/loader": "~0.1.1",
-    "@dojo/shim": "~0.2.3",
+    "@dojo/cli": "^2.0.0",
+    "@dojo/core": "^2.0.0",
+    "@dojo/has": "^2.0.0",
+    "@dojo/loader": "^2.0.0",
+    "@dojo/shim": "^2.0.0",
     "@types/chalk": "^0.4.31",
     "@types/ejs": "^2.3.33",
     "@types/fs-extra": "0.0.34",
