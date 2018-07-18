@@ -1,9 +1,8 @@
 import { Argv } from 'yargs';
 import { Helper } from '@dojo/cli/interfaces';
 import { join, posix } from 'path';
-import * as chalk from 'chalk';
-import createDir from '@dojo/cli-create-app/createDir';
-import renderFiles from '@dojo/cli-create-app/renderFiles';
+import { mkdirsSync } from 'fs-extra';
+import chalk from 'chalk';
 
 const pkgDir: any = require('pkg-dir');
 const packagePath = pkgDir.sync(__dirname);
@@ -23,20 +22,6 @@ export interface CreateWidgetArgs extends Argv {
 	name: string;
 	styles: string;
 	tests: string;
-}
-
-function getDirectoryNames(args: CreateWidgetArgs, folderName: string) {
-	const dirs = [folderName];
-
-	if (!args.styles) {
-		dirs.push(`${folderName}/styles`);
-	}
-
-	if (!args.tests) {
-		dirs.push(`${folderName}/tests/unit`);
-	}
-
-	return dirs;
 }
 
 function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleRoot: string, testRoot: string) {
@@ -68,9 +53,12 @@ export default async function(helper: Helper, args: CreateWidgetArgs) {
 
 	console.info(chalk.underline(`Creating your new widget: ${name}\n`));
 
-	createDir(...getDirectoryNames(args, folderName));
+	for (const dirPath of [folderName, styleRoot, testRoot]) {
+		console.info(chalk.green.bold(' create ') + dirPath);
+		mkdirsSync(dirPath);
+	}
 
-	renderFiles(getRenderFilesConfig(args, folderName, styleRoot, testRoot), {
+	helper.command.renderFiles(getRenderFilesConfig(args, folderName, styleRoot, testRoot), {
 		name,
 		folderName,
 		includeCustomElement: args.component,
