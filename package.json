@@ -48,7 +48,6 @@
     "@dojo/cli": "^3.0.0-alpha.1",
     "@dojo/scripts": "^3.0.0-alpha.6",
     "@dojo/loader": "^2.0.0",
-    "@types/ejs": "^2.3.33",
     "@types/fs-extra": "0.0.34",
     "@types/mockery": "^1.4.29",
     "@types/node": "~9.6.5",
@@ -66,10 +65,10 @@
   "dependencies": {
     "chalk": "~2.4.0",
     "cross-spawn": "^4.0.0",
-    "ejs": "^2.5.2",
     "fs-extra": "^0.30.0",
     "ora": "^0.3.0",
-    "pkg-dir": "^1.0.0"
+    "pkg-dir": "^1.0.0",
+    "tslib": "~1.8.0"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
