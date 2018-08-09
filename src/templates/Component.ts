@@ -11,7 +11,7 @@ import * as css from './<%= componentStylePath %>';
  *
  * Properties that can be set on <%= name %> components
  */
-export interface <%= name %>Properties { };
+export interface <%= name %>Properties { }
 
 export const ThemedBase = ThemedMixin(WidgetBase);
 
