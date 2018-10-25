@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/dojo/cli-create-widget/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/cli-create-widget)
 [![npm version](https://badge.fury.io/js/%40dojo%2Fcli-create-widget.svg)](https://badge.fury.io/js/%40dojo%2Fcli-create-widget)
 
-A [Dojo CLI](https://github/dojo/cli) command that creates a Dojo 2 widget template with an optional custom element descriptor.
+A [Dojo CLI](https://github.com/dojo/cli) command that creates a Dojo 2 widget template with an optional custom element descriptor.
 
 - [Usage](#usage)
 - [Features](#features)
