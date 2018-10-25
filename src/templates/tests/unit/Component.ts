@@ -3,12 +3,12 @@ const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
 import { w } from '@dojo/framework/widget-core/d';
 import harness from '@dojo/framework/testing/harness';
 
-import <%= name %> from './<%= testComponentPath %>';
+import <%= className %> from './<%= testComponentPath %>';
 
-describe('<%= name %>', () => {
+describe('<%= className %>', () => {
 
-	it('should construct <%= name %>', () => {
-		const h = harness(() => w(<%= name %>, {}));
+	it('should construct <%= className %>', () => {
+		const h = harness(() => w(<%= className %>, {}));
 		h.expect(() => null);
 	});
 });

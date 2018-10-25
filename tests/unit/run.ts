@@ -75,6 +75,7 @@ registerSuite('run', {
 
 			assert.deepEqual(renderFilesStub.args[0][1] as any, {
 				name: 'testAppName',
+				className: 'TestAppName',
 				folderName: 'testappname',
 				includeCustomElement: true,
 				componentStylePath: '../testappname.m.css',

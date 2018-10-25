@@ -47,6 +47,10 @@ function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleR
 
 export default async function(helper: Helper, args: CreateWidgetArgs) {
 	const name = args.name;
+	const className = args.name
+		.replace(/(?:^\w|[A-Z]|\b\w)/g, (letter) => letter.toUpperCase())
+		.replace(/\s+/g, '')
+		.replace(/\W+/g, '');
 	const folderName = name.toLowerCase();
 	const styleRoot = args.styles || `${folderName}/styles`;
 	const testRoot = args.tests || `${folderName}/tests/unit`;
@@ -60,6 +64,7 @@ export default async function(helper: Helper, args: CreateWidgetArgs) {
 
 	helper.command.renderFiles(getRenderFilesConfig(args, folderName, styleRoot, testRoot), {
 		name,
+		className,
 		folderName,
 		includeCustomElement: args.component,
 		componentStylePath: posix.relative(folderName, `${styleRoot}/${folderName}.m.css`),

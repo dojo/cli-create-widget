@@ -7,13 +7,11 @@ import { customElement } from '@dojo/framework/widget-core/decorators/customElem
 import * as css from './<%= componentStylePath %>';
 
 /**
- * @type <%= name %>Properties
+ * @type <%= className %>Properties
  *
- * Properties that can be set on <%= name %> components
+ * Properties that can be set on <%= className %> components
  */
-export interface <%= name %>Properties { }
-
-export const ThemedBase = ThemedMixin(WidgetBase);
+export interface <%= className %>Properties { }
 
 <%if (includeCustomElement) { %>
 @customElement({
@@ -24,10 +22,10 @@ export const ThemedBase = ThemedMixin(WidgetBase);
 })
 <% } -%>
 @theme(css)
-export class <%= name %><P extends <%= name %>Properties = <%= name %>Properties> extends ThemedBase<P> {
+export class <%= className %> extends ThemedMixin(WidgetBase)<<%= className %>Properties> {
 	protected render(): DNode | DNode[] {
 		return null;
 	}
 }
 
-export default <%= name %>;
+export default <%= className %>;
