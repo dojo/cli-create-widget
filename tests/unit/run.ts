@@ -2,7 +2,6 @@ const { registerSuite } = intern.getInterface('object');
 const { assert } = intern.getPlugin('chai');
 import { getHelperStub } from '../support/testHelper';
 import { Helper } from '@dojo/cli/interfaces';
-import { join } from 'path';
 import { SinonStub, stub } from 'sinon';
 import * as mockery from 'mockery';
 
@@ -42,19 +41,21 @@ registerSuite('run', {
 	tests: {
 		async 'Should get directories to create from config'() {
 			await run(helperStub, args);
-			assert.equal(mkdirsSyncStub.callCount, 3);
+			assert.equal(mkdirsSyncStub.callCount, 4);
 
-			assert.isTrue(mkdirsSyncStub.calledWithExactly(lowerCaseName));
-			assert.isTrue(mkdirsSyncStub.calledWithExactly(`${lowerCaseName}/styles`));
-			assert.isTrue(mkdirsSyncStub.calledWithExactly(`${lowerCaseName}/tests/unit`));
+			assert.isTrue(mkdirsSyncStub.calledWithExactly(`./${lowerCaseName}`));
+			assert.isTrue(mkdirsSyncStub.calledWithExactly('.'));
+			assert.isTrue(mkdirsSyncStub.calledWithExactly(`./${lowerCaseName}/styles`));
+			assert.isTrue(mkdirsSyncStub.calledWithExactly(`./${lowerCaseName}/tests/unit`));
 		},
 
 		async 'Should get files to render from config'() {
 			await run(helperStub, { ...args, component: true, styles: '.', tests: '.' });
 
-			assert.equal(mkdirsSyncStub.callCount, 3);
+			assert.equal(mkdirsSyncStub.callCount, 4);
 
-			assert.isTrue(mkdirsSyncStub.calledWithExactly(lowerCaseName));
+			assert.isTrue(mkdirsSyncStub.calledWithExactly(`./${lowerCaseName}`));
+			assert.isTrue(mkdirsSyncStub.calledWithExactly('.'));
 			assert.isTrue(mkdirsSyncStub.calledWithExactly('.'));
 			assert.isTrue(mkdirsSyncStub.calledWithExactly('.'));
 
@@ -63,7 +64,7 @@ registerSuite('run', {
 			const renderFilesArgs = renderFilesStub.args[0];
 
 			assert.deepEqual(renderFilesArgs[0].map((obj: any) => obj.dest), [
-				`${join(lowerCaseName, name)}.ts`,
+				`${lowerCaseName}.ts`,
 				`${lowerCaseName}.m.css`,
 				`${lowerCaseName}.m.css.d.ts`,
 				`${name}.ts`
