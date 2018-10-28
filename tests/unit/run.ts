@@ -15,6 +15,7 @@ const args = { name };
 const mkdirsSyncStub: SinonStub = stub();
 let renderFilesStub: SinonStub;
 let consoleStub: SinonStub;
+let configurationStub: SinonStub;
 let helperStub: Helper;
 let run: any;
 
@@ -35,6 +36,7 @@ registerSuite('run', {
 	beforeEach() {
 		helperStub = getHelperStub();
 		renderFilesStub = helperStub.command.renderFiles as any;
+		configurationStub = helperStub.configuration.get as any;
 		mkdirsSyncStub.reset();
 	},
 
@@ -116,6 +118,26 @@ registerSuite('run', {
 				testStylePath: 'testappname.m.css',
 				testComponentPath: 'testappname/testAppName'
 			});
+		},
+
+		async 'Should use prefix from .dojorc'() {
+			const testDirName = 'configDir';
+			configurationStub.returns({ prefix: testDirName });
+
+			await run(helperStub, { ...args, component: true, styles: '.', tests: '.' });
+
+			assert.deepEqual(
+				renderFilesStub.args[0][1] as any,
+				{
+					name: 'testAppName',
+					folderName: `${testDirName}/testappname`,
+					includeCustomElement: true,
+					componentStylePath: '../../testappname.m.css',
+					testStylePath: 'testappname.m.css',
+					testComponentPath: 'testappname/testAppName'
+				},
+				''
+			);
 		}
 	}
 });
