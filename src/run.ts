@@ -1,11 +1,13 @@
 import { Argv } from 'yargs';
-import { Helper } from '@dojo/cli/interfaces';
-import { join, posix } from 'path';
+import { Helper, Config } from '@dojo/cli/interfaces';
+import { join, posix, dirname, relative } from 'path';
 import { mkdirsSync } from 'fs-extra';
 import chalk from 'chalk';
 
+const findUp: any = require('find-up');
 const pkgDir: any = require('pkg-dir');
-const packagePath = pkgDir.sync(__dirname);
+
+const packagePath: string = pkgDir.sync(__dirname);
 
 /**
  * @type CreateWidgetArgs
@@ -28,19 +30,25 @@ export interface CreateWidgetArgs extends Argv {
 	prefix: string;
 }
 
-function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleRoot: string, testRoot: string) {
+function getRenderFilesConfig(
+	args: CreateWidgetArgs,
+	lowerCaseName: string,
+	widgetRoot: string,
+	styleRoot: string,
+	testRoot: string
+) {
 	return [
 		{
 			src: join(packagePath, 'templates', 'Component.ts'),
-			dest: join(folderName, `${args.name}.ts`)
+			dest: join(widgetRoot, `${lowerCaseName}.ts`)
 		},
 		{
 			src: join(packagePath, 'templates', 'styles/component.m.css'),
-			dest: join(styleRoot, `${folderName}.m.css`)
+			dest: join(styleRoot, `${lowerCaseName}.m.css`)
 		},
 		{
 			src: join(packagePath, 'templates', 'styles/component.m.css.d.ts'),
-			dest: join(styleRoot, `${folderName}.m.css.d.ts`)
+			dest: join(styleRoot, `${lowerCaseName}.m.css.d.ts`)
 		},
 		{
 			src: join(packagePath, 'templates', 'tests/unit/Component.ts'),
@@ -49,26 +57,52 @@ function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleR
 	];
 }
 
+function getWidgetPrefix(force: boolean, prefix: string, configPrefix: string): string {
+	if (force) {
+		return '.';
+	} else if (prefix) {
+		return prefix;
+	} else if (configPrefix) {
+		return configPrefix;
+	} else {
+		console.info(
+			chalk.yellow('Warning: No ') +
+				chalk.whiteBright.bold('prefix ') +
+				chalk.yellow('provided in command or configuration. Continuining with default ') +
+				chalk.whiteBright.bold('./src')
+		);
+		try {
+			const projectRootDir = dirname(findUp.sync('.dojorc'));
+			return relative(process.cwd(), join(projectRootDir, 'src'));
+		} catch (e) {
+			return '.';
+		}
+	}
+}
+
 export default async function(helper: Helper, args: CreateWidgetArgs) {
 	const name = args.name;
-	const folderName = name.toLowerCase();
-	const styleRoot = args.styles || `${folderName}/styles`;
-	const testRoot = args.tests || `${folderName}/tests/unit`;
+	const config: Config = helper.configuration.get();
+	const widgetRoot = getWidgetPrefix(args.force, args.prefix, config['prefix']);
+	const widgetName = name.toLowerCase();
+	const folderName = `${widgetRoot}/${widgetName}`;
+	const styleRoot = args.styles || `${widgetRoot}/${widgetName}/styles`;
+	const testRoot = args.tests || `${widgetRoot}/${widgetName}/tests/unit`;
 
 	console.info(chalk.underline(`Creating your new widget: ${name}\n`));
 
-	for (const dirPath of [folderName, styleRoot, testRoot]) {
+	for (const dirPath of [folderName, widgetRoot, styleRoot, testRoot]) {
 		console.info(chalk.green.bold(' create ') + dirPath);
 		mkdirsSync(dirPath);
 	}
 
-	helper.command.renderFiles(getRenderFilesConfig(args, folderName, styleRoot, testRoot), {
+	helper.command.renderFiles(getRenderFilesConfig(args, widgetName, widgetRoot, styleRoot, testRoot), {
 		name,
 		folderName,
 		includeCustomElement: args.component,
-		componentStylePath: posix.relative(folderName, `${styleRoot}/${folderName}.m.css`),
-		testStylePath: posix.relative(testRoot, `${styleRoot}/${folderName}.m.css`),
-		testComponentPath: posix.relative(testRoot, `${folderName}/${name}`)
+		componentStylePath: posix.relative(folderName, `${styleRoot}/${widgetName}.m.css`),
+		testStylePath: posix.relative(testRoot, `${styleRoot}/${widgetName}.m.css`),
+		testComponentPath: posix.relative(testRoot, `${widgetName}/${name}`)
 	});
 
 	console.info(chalk.green.bold('\nAll done!\n'));
