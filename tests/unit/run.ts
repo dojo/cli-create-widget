@@ -82,6 +82,40 @@ registerSuite('run', {
 				testStylePath: 'testappname.m.css',
 				testComponentPath: 'testappname/testAppName'
 			});
+		},
+
+		async 'Should use current directory when forced'() {
+			await run(helperStub, {
+				...args,
+				component: true,
+				styles: '.',
+				tests: '.',
+				force: true,
+				prefix: 'other/dir'
+			});
+
+			assert.deepEqual(renderFilesStub.args[0][1] as any, {
+				name: 'testAppName',
+				folderName: './testappname',
+				includeCustomElement: true,
+				componentStylePath: '../testappname.m.css',
+				testStylePath: 'testappname.m.css',
+				testComponentPath: 'testappname/testAppName'
+			});
+		},
+
+		async 'Should use prefix when provided'() {
+			const prefixDir = 'one/two';
+			await run(helperStub, { ...args, component: true, styles: '.', tests: '.', prefix: prefixDir });
+
+			assert.deepEqual(renderFilesStub.args[0][1] as any, {
+				name: 'testAppName',
+				folderName: `${prefixDir}/testappname`,
+				includeCustomElement: true,
+				componentStylePath: '../../../testappname.m.css',
+				testStylePath: 'testappname.m.css',
+				testComponentPath: 'testappname/testAppName'
+			});
 		}
 	}
 });
