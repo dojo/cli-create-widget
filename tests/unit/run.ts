@@ -126,18 +126,18 @@ registerSuite('run', {
 
 			await run(helperStub, { ...args, component: true, styles: '.', tests: '.' });
 
-			assert.deepEqual(
-				renderFilesStub.args[0][1] as any,
-				{
-					name: 'testAppName',
-					folderName: `${testDirName}/testappname`,
-					includeCustomElement: true,
-					componentStylePath: '../../testappname.m.css',
-					testStylePath: 'testappname.m.css',
-					testComponentPath: 'testappname/testAppName'
-				},
-				''
-			);
+			assert.deepEqual(renderFilesStub.args[0][1] as any, {
+				name: 'testAppName',
+				folderName: `${testDirName}/testappname`,
+				includeCustomElement: true,
+				componentStylePath: '../../testappname.m.css',
+				testStylePath: 'testappname.m.css',
+				testComponentPath: 'testappname/testAppName'
+			});
+		},
+
+		async 'Should default to project root ./src when not set in .dojorc'() {
+			assert.isTrue(false);
 		}
 	}
 });
