@@ -29,4 +29,18 @@ export default function(options: OptionsHelper): void {
 		describe: 'Generate a Custom Element wrapper for your widget',
 		type: 'boolean'
 	});
+	options('f', {
+		alias: 'force',
+		default: false,
+		demand: false,
+		describe: 'Generate element regardless of directory',
+		type: 'boolean'
+	});
+	options('p', {
+		alias: 'prefix',
+		defaultDescription: 'src/<section_folder>',
+		demand: false,
+		describe: 'The location to place your widget',
+		type: 'string'
+	});
 }

@@ -13,15 +13,19 @@ const packagePath = pkgDir.sync(__dirname);
  * Arguments that can be passed when creating a widget using the Dojo CLI
  *
  * @property component       Generate a Custom Element wrapper
+ * @property force           Create widget regardless of project
  * @property name            Name used for the generated widget
  * @property styles          Path to place generated CSS files
  * @property tests           Path to place generated test files
+ * @property prefix          The location to place your widget
  */
 export interface CreateWidgetArgs extends Argv {
 	component: boolean;
+	force: boolean;
 	name: string;
 	styles: string;
 	tests: string;
+	prefix: string;
 }
 
 function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleRoot: string, testRoot: string) {

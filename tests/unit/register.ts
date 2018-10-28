@@ -18,11 +18,14 @@ registerSuite('register', {
 		'Should add correct yargs options'() {
 			const options = sandbox.stub();
 			register(options);
-			assert.strictEqual(options.callCount, 4);
-			assert.isTrue(options.firstCall.calledWithMatch('n', { alias: 'name' }));
-			assert.isTrue(options.secondCall.calledWithMatch('s', { alias: 'styles' }));
-			assert.isTrue(options.thirdCall.calledWithMatch('t', { alias: 'tests' }));
-			assert.isTrue(options.lastCall.calledWithMatch('c', { alias: 'component' }));
+			assert.strictEqual(options.callCount, 6);
+
+			assert.isTrue(options.calledWithMatch('n', { alias: 'name' }), 'one');
+			assert.isTrue(options.calledWithMatch('s', { alias: 'styles' }), 'two');
+			assert.isTrue(options.calledWithMatch('t', { alias: 'tests' }), 'three');
+			assert.isTrue(options.calledWithMatch('c', { alias: 'component' }), 'four');
+			assert.isTrue(options.calledWithMatch('f', { alias: 'force' }), 'five');
+			assert.isTrue(options.calledWithMatch('p', { alias: 'prefix' }), 'six');
 		}
 	}
 });
