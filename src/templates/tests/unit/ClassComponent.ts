@@ -1,6 +1,6 @@
-const { describe, it, beforeEach, afterEach } = intern.getInterface('bdd');
+const { describe, it } = intern.getInterface('bdd');
 
-import { w } from '@dojo/framework/widget-core/d';
+import { w } from '@dojo/framework/core/vdom';
 import harness from '@dojo/framework/testing/harness';
 
 import <%= className %> from './<%= testComponentPath %>';

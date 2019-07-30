@@ -77,7 +77,6 @@ registerSuite('run', {
 				name: 'testAppName',
 				className: 'TestAppName',
 				folderName: 'testappname',
-				includeCustomElement: true,
 				componentStylePath: '../testappname.m.css',
 				testStylePath: 'testappname.m.css',
 				testComponentPath: 'testappname/testAppName'

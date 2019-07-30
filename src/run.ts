@@ -18,28 +18,34 @@ const packagePath = pkgDir.sync(__dirname);
  * @property tests           Path to place generated test files
  */
 export interface CreateWidgetArgs extends Argv {
-	component: boolean;
+	class: boolean;
 	name: string;
 	styles: string;
 	tests: string;
+	tsx: boolean;
 }
 
 function getRenderFilesConfig(args: CreateWidgetArgs, folderName: string, styleRoot: string, testRoot: string) {
+	let module = 'FunctionComponent';
+	if (args.class) {
+		module = 'ClassComponent';
+	}
+	module = args.tsx ? `${module}.tsx` : `${module}.ts`;
 	return [
 		{
-			src: join(packagePath, 'templates', 'Component.ts'),
+			src: join(packagePath, 'templates', module),
 			dest: join(folderName, `${args.name}.ts`)
 		},
 		{
-			src: join(packagePath, 'templates', 'styles/component.m.css'),
+			src: join(packagePath, 'templates', 'styles', 'Component.m.css'),
 			dest: join(styleRoot, `${folderName}.m.css`)
 		},
 		{
-			src: join(packagePath, 'templates', 'styles/component.m.css.d.ts'),
+			src: join(packagePath, 'templates', 'styles', 'Component.m.css.d.ts'),
 			dest: join(styleRoot, `${folderName}.m.css.d.ts`)
 		},
 		{
-			src: join(packagePath, 'templates', 'tests/unit/Component.ts'),
+			src: join(packagePath, 'templates', 'tests', 'unit', module),
 			dest: join(testRoot, `${args.name}.ts`)
 		}
 	];
@@ -66,7 +72,6 @@ export default async function(helper: Helper, args: CreateWidgetArgs) {
 		name,
 		className,
 		folderName,
-		includeCustomElement: args.component,
 		componentStylePath: posix.relative(folderName, `${styleRoot}/${folderName}.m.css`),
 		testStylePath: posix.relative(testRoot, `${styleRoot}/${folderName}.m.css`),
 		testComponentPath: posix.relative(testRoot, `${folderName}/${name}`)
