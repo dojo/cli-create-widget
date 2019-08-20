@@ -19,10 +19,10 @@ registerSuite('register', {
 			const options = sandbox.stub();
 			register(options);
 			assert.strictEqual(options.callCount, 4);
-			assert.isTrue(options.firstCall.calledWithMatch('n', { alias: 'name' }));
-			assert.isTrue(options.secondCall.calledWithMatch('s', { alias: 'styles' }));
-			assert.isTrue(options.thirdCall.calledWithMatch('t', { alias: 'tests' }));
-			assert.isTrue(options.lastCall.calledWithMatch('c', { alias: 'component' }));
+			assert.isTrue(options.firstCall.calledWithMatch('name', { alias: 'n' }));
+			assert.isTrue(options.secondCall.calledWithMatch('styles', { alias: 's' }));
+			assert.isTrue(options.thirdCall.calledWithMatch('tests', { alias: 't' }));
+			assert.isTrue(options.lastCall.calledWithMatch('class', { alias: 'c' }));
 		}
 	}
 });
