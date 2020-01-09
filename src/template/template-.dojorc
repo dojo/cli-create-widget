@@ -1,0 +1,12 @@
+{
+	"extends": "./node_modules/@dojo/parade/parade.json",
+	"build-theme": {
+		"themes": ["<%= name %>"]
+	},
+	"build-widget": {
+		"prefix": "<%= name %>",
+		"widgets": [
+			"src/button/Button"
+		]
+	}
+}
