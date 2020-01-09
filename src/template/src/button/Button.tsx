@@ -1,9 +1,10 @@
 import { create, tsx } from '@dojo/framework/core/vdom';
 import theme from '@dojo/framework/core/middleware/theme';
 
-import * as css from '../theme/default/button.m.css';
+import * as css from '../theme/default/Button.m.css';
 
 export interface ButtonProperties {
+	/** Handler for the button click */
 	onClick: () => void;
 }
 
