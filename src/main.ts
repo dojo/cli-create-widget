@@ -92,9 +92,6 @@ const command: Command<CreateWidgetArgs> = {
 		await helper.command.run('init', '');
 
 		console.info(chalk.green.bold('\nAll done!\n'));
-	},
-	async validate(helper: Helper) {
-		return true;
 	}
 };
 
