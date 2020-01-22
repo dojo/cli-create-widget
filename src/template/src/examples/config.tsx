@@ -1,6 +1,6 @@
-import <%= parsedName %> from '<%= name %>/theme/<%= name %>';
+import <%= parsedName %> from '../theme/<%= name %>';
 
-import ButtonExample from './widgets/button/ButtonExample';
+import ButtonExample from './button/ButtonExample';
 
 `!has('docs')`;
 import testsContext from './tests';

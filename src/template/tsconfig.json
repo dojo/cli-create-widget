@@ -14,10 +14,7 @@
 		"outDir": "dist",
 		"strict": true,
 		"target": "es5",
-		"types": [ "intern" ],
-		"paths": {
-			"<%= name %>/*": ["src/*"]
-		}
+		"types": [ "intern" ]
 	},
 	"include": [
 		"./src/**/*.ts",
