@@ -5,7 +5,7 @@
 		"experimentalDecorators": true,
 		"jsx": "react",
 		"jsxFactory": "tsx",
-		"module": "umd",
+		"module": "commonjs",
 		"moduleResolution": "node",
 		"downlevelIteration": true,
 		"baseUrl": "./",
