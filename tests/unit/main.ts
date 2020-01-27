@@ -62,13 +62,13 @@ describe('main', () => {
 		assert.strictEqual(mkdirSyncStub.callCount, 8);
 		assert.deepEqual(mkdirSyncStub.getCalls().map((call) => call.args[0]), [
 			'test-app',
-			'test-app/src',
-			'test-app/src/button',
-			'test-app/src/examples',
-			'test-app/src/examples/button',
-			'test-app/src/theme',
-			'test-app/src/theme/test-app',
-			'test-app/src/theme/default'
+			path.join('test-app', 'src'),
+			path.join('test-app', 'src', 'button'),
+			path.join('test-app', 'src', 'examples'),
+			path.join('test-app', 'src', 'examples', 'button'),
+			path.join('test-app', 'src', 'theme'),
+			path.join('test-app', 'src', 'theme', 'test-app'),
+			path.join('test-app', 'src', 'theme', 'default')
 		]);
 		assert.isTrue((helperStub.command.renderFiles as SinonStub).calledOnce);
 		assert.deepEqual((helperStub.command.renderFiles as SinonStub).firstCall.args[0], [
