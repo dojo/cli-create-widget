@@ -3,9 +3,8 @@ import * as chalk from 'chalk';
 import * as fs from 'fs-extra';
 import * as glob from 'glob';
 import * as path from 'path';
-import * as cs from 'cross-spawn';
-import * as ora from 'ora';
-import changeDir from './changeDir';
+
+import npmInstall from './npmInstall';
 
 interface CreateWidgetArgs {
 	name: string;
@@ -15,30 +14,6 @@ function stripTemplateFromFileName(filePath: string) {
 	const parsedPath = path.parse(filePath);
 	parsedPath.base = parsedPath.base.replace('template-', '');
 	return path.normalize(path.format(parsedPath));
-}
-
-async function installNpmModules() {
-	return new Promise((resolve, reject) => {
-		const spinner = ora({
-			spinner: 'dots',
-			color: 'white',
-			text: 'npm install'
-		}).start();
-		cs.spawn('npm', ['install'], { stdio: 'ignore' })
-			.on('exit', function(code: Number) {
-				if (code !== 0) {
-					spinner.stopAndPersist({ text: chalk.red.bold(' failed') });
-					reject(new Error(`exit code: ${code}`));
-				} else {
-					spinner.stopAndPersist({ text: chalk.green.bold(' completed') });
-					resolve();
-				}
-			})
-			.on('error', (err: Error) => {
-				spinner.stopAndPersist({ text: chalk.red.bold(' failed') });
-				reject(err);
-			});
-	});
 }
 
 const command: Command<CreateWidgetArgs> = {
@@ -80,13 +55,13 @@ const command: Command<CreateWidgetArgs> = {
 			};
 		});
 
-		changeDir(name);
+		process.chdir(name);
 
 		console.info(chalk.underline('\nCreating Files'));
 		helper.command.renderFiles(files, { name, parsedName });
 
 		console.info(chalk.underline('\nRunning npm install'));
-		await installNpmModules();
+		await npmInstall();
 
 		console.info(chalk.underline('\nRunning dojo init'));
 		await helper.command.run('init', '');
