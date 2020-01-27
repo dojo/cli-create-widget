@@ -55,7 +55,9 @@ registerSuite('npmInstall', {
 			await npmInstall.default();
 			assert.isTrue(startStub.calledOnce, 'Should call start on the spinner');
 			assert.isTrue(stopAndPersistStub.calledOnce, 'Should stop the spinner');
-			assert.deepEqual(stopAndPersistStub.firstCall.args[0], { text: '\u001b[32m\u001b[1m completed\u001b[22m\u001b[39m' });
+			assert.deepEqual(stopAndPersistStub.firstCall.args[0], {
+				text: '\u001b[32m\u001b[1m completed\u001b[22m\u001b[39m'
+			});
 		},
 		async 'Should reject with an error when spawn throws an error'() {
 			const errorMessage = 'test error message';
@@ -66,7 +68,9 @@ registerSuite('npmInstall', {
 			} catch (error) {
 				assert.equal(error.message, errorMessage);
 				assert.isTrue(stopAndPersistStub.calledOnce, 'Should stop the spinner');
-				assert.deepEqual(stopAndPersistStub.firstCall.args[0], { text: '\u001b[31m\u001b[1m failed\u001b[22m\u001b[39m' });
+				assert.deepEqual(stopAndPersistStub.firstCall.args[0], {
+					text: '\u001b[31m\u001b[1m failed\u001b[22m\u001b[39m'
+				});
 			}
 		},
 		async 'Should reject with an error when spawn process returns an exit code !== 0'() {
@@ -78,7 +82,9 @@ registerSuite('npmInstall', {
 			} catch (error) {
 				assert.equal(error.message, `exit code: ${errorExitCode}`);
 				assert.isTrue(stopAndPersistStub.calledOnce, 'Should stop the spinner');
-				assert.deepEqual(stopAndPersistStub.firstCall.args[0], { text: '\u001b[31m\u001b[1m failed\u001b[22m\u001b[39m' });
+				assert.deepEqual(stopAndPersistStub.firstCall.args[0], {
+					text: '\u001b[31m\u001b[1m failed\u001b[22m\u001b[39m'
+				});
 			}
 		}
 	}
