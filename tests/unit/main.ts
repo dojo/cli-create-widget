@@ -59,7 +59,7 @@ describe('main', () => {
 	it('Should scaffold widget library project', async () => {
 		const command = (<ESModule>require('../../src/main')).default;
 		await command.run(helperStub, { name: libraryName });
-		assert.strictEqual(mkdirSyncStub.callCount, 8);
+		assert.strictEqual(mkdirSyncStub.callCount, 9);
 		assert.deepEqual(mkdirSyncStub.getCalls().map((call) => call.args[0]), [
 			'test-app',
 			path.join('test-app', 'src'),
@@ -68,6 +68,7 @@ describe('main', () => {
 			path.join('test-app', 'src', 'examples', 'button'),
 			path.join('test-app', 'src', 'theme'),
 			path.join('test-app', 'src', 'theme', 'test-app'),
+			path.join('test-app', 'src', 'theme', 'test-app', 'variants'),
 			path.join('test-app', 'src', 'theme', 'default')
 		]);
 		assert.isTrue((helperStub.command.renderFiles as SinonStub).calledOnce);
@@ -86,11 +87,11 @@ describe('main', () => {
 			},
 			{
 				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src', 'button/Button.tsx'),
-				dest: path.join('src', 'button/Button.tsx')
+				dest: path.join('src', 'button', 'Button.tsx')
 			},
 			{
 				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src', 'button/README.md'),
-				dest: path.join('src', 'button/README.md')
+				dest: path.join('src', 'button', 'README.md')
 			},
 			{
 				src: path.join(
@@ -99,53 +100,152 @@ describe('main', () => {
 					'dev',
 					'src',
 					'template',
-					'src/examples/button/ButtonExample.tsx'
+					'src',
+					'examples',
+					'button',
+					'ButtonExample.tsx'
 				),
-				dest: path.join('src/examples/button/ButtonExample.tsx')
+				dest: path.join('src', 'examples', 'button', 'ButtonExample.tsx')
 			},
 			{
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/examples/config.tsx'),
-				dest: path.join('src/examples/config.tsx')
+				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src', 'examples', 'config.tsx'),
+				dest: path.join('src', 'examples', 'config.tsx')
 			},
 			{
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/examples/README.md'),
-				dest: path.join('src/examples/README.md')
+				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src', 'examples', 'README.md'),
+				dest: path.join('src', 'examples', 'README.md')
 			},
 			{
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/examples/tests.tsx'),
-				dest: path.join('src/examples/tests.tsx')
+				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src', 'examples', 'tests.tsx'),
+				dest: path.join('src', 'examples', 'tests.tsx')
 			},
 			{
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/index.html'),
-				dest: path.join('src/index.html')
+				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src', 'index.html'),
+				dest: path.join('src', 'index.html')
 			},
 			{
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/main.tsx'),
-				dest: path.join('src/main.tsx')
+				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src', 'main.tsx'),
+				dest: path.join('src', 'main.tsx')
 			},
 			{
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/theme/{name}/Button.m.css'),
-				dest: path.join('src/theme/test-app/Button.m.css')
+				src: path.join(
+					process.cwd(),
+					'dist',
+					'dev',
+					'src',
+					'template',
+					'src',
+					'theme',
+					'{name}',
+					'Button.m.css'
+				),
+				dest: path.join('src', 'theme', 'test-app', 'Button.m.css')
 			},
 			{
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/theme/{name}/Button.m.css.d.ts'),
-				dest: path.join('src/theme/test-app/Button.m.css.d.ts')
+				src: path.join(
+					process.cwd(),
+					'dist',
+					'dev',
+					'src',
+					'template',
+					'src',
+					'theme',
+					'{name}',
+					'Button.m.css.d.ts'
+				),
+				dest: path.join('src', 'theme', 'test-app', 'Button.m.css.d.ts')
 			},
 			{
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/theme/{name}/index.ts'),
-				dest: path.join('src/theme/test-app/index.ts')
+				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src', 'theme', '{name}', 'index.ts'),
+				dest: path.join('src', 'theme', 'test-app', 'index.ts')
 			},
 			{
-				dest: path.join('src/theme/test-app/variables.css'),
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/theme/{name}/variables.css')
+				src: path.join(
+					process.cwd(),
+					'dist',
+					'dev',
+					'src',
+					'template',
+					'src',
+					'theme',
+					'{name}',
+					'variants',
+					'default.m.css'
+				),
+				dest: path.join('src', 'theme', 'test-app', 'variants', 'default.m.css')
 			},
 			{
-				dest: path.join('src/theme/default/Button.m.css'),
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/theme/default/Button.m.css')
+				src: path.join(
+					process.cwd(),
+					'dist',
+					'dev',
+					'src',
+					'template',
+					'src',
+					'theme',
+					'{name}',
+					'variants',
+					'default.m.css.d.ts'
+				),
+				dest: path.join('src', 'theme', 'test-app', 'variants', 'default.m.css.d.ts')
 			},
 			{
-				dest: path.join('src/theme/default/Button.m.css.d.ts'),
-				src: path.join(process.cwd(), 'dist', 'dev', 'src', 'template', 'src/theme/default/Button.m.css.d.ts')
+				src: path.join(
+					process.cwd(),
+					'dist',
+					'dev',
+					'src',
+					'template',
+					'src',
+					'theme',
+					'{name}',
+					'variants',
+					'red.m.css'
+				),
+				dest: path.join('src', 'theme', 'test-app', 'variants', 'red.m.css')
+			},
+			{
+				src: path.join(
+					process.cwd(),
+					'dist',
+					'dev',
+					'src',
+					'template',
+					'src',
+					'theme',
+					'{name}',
+					'variants',
+					'red.m.css.d.ts'
+				),
+				dest: path.join('src', 'theme', 'test-app', 'variants', 'red.m.css.d.ts')
+			},
+			{
+				dest: path.join('src', 'theme', 'default', 'Button.m.css'),
+				src: path.join(
+					process.cwd(),
+					'dist',
+					'dev',
+					'src',
+					'template',
+					'src',
+					'theme',
+					'default',
+					'Button.m.css'
+				)
+			},
+			{
+				dest: path.join('src', 'theme', 'default', 'Button.m.css.d.ts'),
+				src: path.join(
+					process.cwd(),
+					'dist',
+					'dev',
+					'src',
+					'template',
+					'src',
+					'theme',
+					'default',
+					'Button.m.css.d.ts'
+				)
 			},
 			{
 				dest: '.dojorc',

@@ -11,5 +11,5 @@ export interface ButtonProperties {
 const factory = create({ theme }).properties<ButtonProperties>();
 export default factory(function Button({ children, properties, middleware: { theme } }) {
 	const themedCss = theme.classes(css);
-	return <button onclick={() => { properties().onClick(); }} classes={[themedCss.root]}>{children()}</button>;
+	return <button onclick={() => { properties().onClick(); }} classes={[themedCss.root, theme.variant()]}>{children()}</button>;
 });

@@ -1,5 +1,5 @@
 .root {
     width: 50%;
     height: 50%;
-    background: red;
+    background: var(--background-color);
 }

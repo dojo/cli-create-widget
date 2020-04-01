@@ -8,7 +8,7 @@ import testsContext from './tests';
 const tests = typeof testsContext !== 'undefined' ? testsContext : { keys: () => [] };
 
 export const config = {
-	name: '@dojo/widgets',
+	name: '<%- name %>',
 	home: 'src/examples/README.md',
 	themes: [
 		{ label: '<%= name %>', theme: <%= parsedName %> },
