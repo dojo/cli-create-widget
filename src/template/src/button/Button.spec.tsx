@@ -8,7 +8,7 @@ import * as css from '../theme/default/Button.m.css';
 
 const baseAssertion = assertionTemplate(() => {
 	return (
-		<button classes={[css.root]} onclick={() => {}}>Click Me!</button>
+		<button classes={[css.root, undefined]} onclick={() => {}}>Click Me!</button>
 	);
 });
 
