@@ -1,12 +1,11 @@
 const { describe, it } = intern.getInterface('bdd');
 import { tsx } from '@dojo/framework/core/vdom';
-import assertionTemplate from '@dojo/framework/testing/assertionTemplate';
-import harness from '@dojo/framework/testing/harness';
+import renderer, { assertion } from '@dojo/framework/testing/renderer';
 
 import Button from './Button';
 import * as css from '../theme/default/Button.m.css';
 
-const baseAssertion = assertionTemplate(() => {
+const baseAssertion = assertion(() => {
 	return (
 		<button classes={[css.root, undefined]} onclick={() => {}}>Click Me!</button>
 	);
@@ -14,7 +13,7 @@ const baseAssertion = assertionTemplate(() => {
 
 describe('Button', () => {
 	it('render', () => {
-		const h = harness(() => <Button onClick={() => {}}>Click Me!</Button>);
-		h.expect(baseAssertion);
+		const r = renderer(() => <Button onClick={() => {}}>Click Me!</Button>);
+		r.expect(baseAssertion);
 	});
 });
