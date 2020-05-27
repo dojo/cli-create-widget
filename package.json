@@ -1,6 +1,6 @@
 {
   "name": "@dojo/cli-create-widget",
-  "version": "7.0.0-pre",
+  "version": "7.0.0",
   "description": "Command to scaffold a Dojo widget library",
   "private": true,
   "homepage": "https://dojo.io",
